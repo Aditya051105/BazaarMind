@@ -1,8 +1,13 @@
+import os
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-app = Flask(__name__)
+# Define template and static folders using absolute paths to support Vercel serverless environment
+template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates'))
+static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 
 # Dummy Data Store (In-memory, user-specific)
 # Keyed by user mobile number
